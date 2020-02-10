@@ -45,16 +45,15 @@ const Login = () => {
 									 || errEmail 
 									 || errPassword;
 
-	const onClick = () => {
+	const onClick = e => {
+		console.log('e', e);
+		console.log('form', state);
+		
 
 	};
 
-	const onSubmit = () => {
-		
-	}
-
 	return (
-		<form onSubmit={onSubmit}>
+		<form>
 			<TextField
 			required
 			name='user'
