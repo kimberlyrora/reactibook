@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 
-
 const Login = () => {
   const [state, setState] = useState({
 		user: '',
@@ -17,11 +16,6 @@ const Login = () => {
 		[name]: value
 	});
 
-	const onChange = e => {
-		const { target: { name , value } } = e;
-		settingState(name, value);
-	};
-
 	const onBlur = e => {
 		const { target: { pattern, value, name } } = e;
 
@@ -31,16 +25,36 @@ const Login = () => {
 		if(validation) {
 			isUser ? 
 			settingState('errEmail', false) 
-			: settingState(errPassword, false); 
+			: settingState('errPassword', true); 
 		} else {
 			isUser ?
 			settingState('errEmail', true) 
-			: settingState(errPassword, true);
+			: settingState('errPassword', false);
 		}
 	};
 
+	const onChange = e => {
+		const { target: { name , value } } = e;
+		settingState(name, value);
+	};
+
+	const emptyUndefNull = prop => ['', undefined, null].some(e => e === prop); 
+	
+	const disabled = emptyUndefNull(user) 
+									 || emptyUndefNull(password) 
+									 || errEmail 
+									 || errPassword;
+
+	const onClick = () => {
+
+	};
+
+	const onSubmit = () => {
+		
+	}
+
 	return (
-		<>
+		<form onSubmit={onSubmit}>
 			<TextField
 			required
 			name='user'
@@ -52,7 +66,8 @@ const Login = () => {
 			helperText={errEmail ? 'Entrada inválida.' : null}
 		  inputProps={{ 
 			  pattern: '^[a-zA-Z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+/=?^_`{|}~-]{1,63})*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.){1,63}[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9]){1,63}?$',
-			  maxLength: 189
+				minLength: 5,
+				maxLength: 189
 			}}
 		  />
 		  <TextField
@@ -66,11 +81,18 @@ const Login = () => {
 				onChange={onChange}
 				helperText={errPassword ? 'Entrada inválida.' : null}
 				inputProps={{ 
-					pattern: '[^\s]',
+					pattern: '[\\s]',
+					minLength: 3,
 					maxLength: 100
 				}}
       />
-	</>
+			<button 
+				disabled={disabled}
+				onClick={onClick}
+			>
+				Ingresar
+			</button>
+	</form>
 	);
 };
 
