@@ -8,8 +8,11 @@ const postsApi = require('./routes/posts.js');
 
 const { 
   logErrors, 
+  wrapErrors,
   errorHandler 
 } = require('./utils/middleware/errorHandlers');
+
+const notFoundHandler =  require('./utils/middleware/notFoundHandler');
 
 
 
@@ -18,7 +21,12 @@ app.use(express.json());
 
 postsApi(app);
 
+// Catch 404
+app.use(notFoundHandler);
+
+// Errors middleware
 app.use(logErrors);
+app.use(wrapErrors);
 app.use(errorHandler);
 
 
