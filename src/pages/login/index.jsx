@@ -46,10 +46,6 @@ const Login = () => {
 									 || errPassword;
 
 	const onClick = e => {
-		console.log('e', e);
-		console.log('form', state);
-		
-
 	};
 
 	return (
