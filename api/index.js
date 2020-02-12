@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+var cors = require("cors");
 
 const { config } = require('./config/index');
 
@@ -13,6 +14,7 @@ const {
 
 const notFoundHandler =  require('./utils/middleware/notFoundHandler');
 
+app.use(cors());
 //body parser
 app.use(express.json());
 

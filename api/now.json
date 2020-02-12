@@ -1,0 +1,12 @@
+{
+	"name": "reactibook",
+	"version": 2,
+	"builds": [{ "src": "index.js", "use": "@now/node"}],
+	"routes": [{ "src": "/(.*)", "dest": "/index.js"}],
+	"env": {
+		"DB_USER": "@reactibook-user",
+		"DB_PASSWORD": "@reactibook-password",
+		"DB_HOST": "@reactibook-host",
+		"DB_NAME": "@reactibook-db"
+	}
+}
