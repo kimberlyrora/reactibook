@@ -15,7 +15,6 @@ const createPostSchema = {
 }
 
 const updatePostSchema = {
-	id: postIdSchema.required(),
 	user: postUserSchema.required(),
 	privacy: postPrivacySchema.required(),
 	date: postDateSchema.required(),
@@ -25,5 +24,6 @@ const updatePostSchema = {
 module.exports = {
 	postIdSchema,
 	createPostSchema,
-	updatePostSchema
+	updatePostSchema,
+	postPrivacySchema
 }

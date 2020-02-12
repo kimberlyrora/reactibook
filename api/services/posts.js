@@ -10,8 +10,8 @@ class PostsService {
 		return posts || [];
 	}
 
-	async getPostsFiltered({ filter }) {
-		const query =  filter && { filter: { $in: filter }};
+	async getPostsFiltered({ privacy }) {
+		const query =  privacy && { privacy: privacy };
 		const posts = await this.mongoDB.get(this.collection, query);
 		return posts || [];
 	}

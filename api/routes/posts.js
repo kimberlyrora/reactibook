@@ -3,7 +3,8 @@ const PostsService = require('../services/posts');
 const {
   postIdSchema,
   createPostSchema,
-  updatePostSchema
+	updatePostSchema,
+	postPrivacySchema
 } = require('../utils/schemas/posts');
 
 const validationHandler = require('../utils/middleware/validationHandler');
@@ -28,11 +29,13 @@ function postsApi(app) {
     }
   });
 
-  router.get('/:filter', async function(req, res, next) {
-    const { filter } = req.params;
+	router.get('/:privacy', 
+	  validationHandler({ privacy: postPrivacySchema }, 'params'), 
+	  async function(req, res, next) {
+    const { privacy } = req.params;    
     // query
     try {
-      const posts = await postsServices.getPostsFiltered({ filter });
+      const posts = await postsServices.getPostsFiltered({ privacy });
       res.status(200).json({
         data: posts,
         message: 'posts filtered'
